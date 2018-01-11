@@ -58,12 +58,25 @@ router.get('/scrape', function (request, response) {
         if (error) {
             response.status(500).end();
         } else {
-            response.status(201).send('Record(s) created').end();
+            //response.status(201).send('Record(s) created').end();
+            response.status(201).send('Added 20 new articles!').end();
+            //response.redirect("/"); //doesn't work.
         }
     });
     console.log('Record(s) created console'); // terminal
 
 });
 
+router.get('/saved', function (request, response) {
+    db.savedArticle.find(function (error, articles) {
+        if (error) {
+            response.status(500).end();
+        } else {
+            response.render('allarticles', {
+                articles: articles
+            });
+        }
+    });
+});
 
 module.exports = router;
