@@ -1,0 +1,37 @@
+<h1>
+    <a href="{{article.link}}">{{article.title}}</a>
+</h1>
+
+{{#if article.comments}}
+<h3>Comments</h3>
+
+<ul>
+    {{#each article.comments}}
+    <li>
+        <dl>
+            <dd>
+                <a href="mailto:{{this.email}}">{{this.name}}</a>
+            </dd>
+            <dd>{{this.comment}}</dd>
+        </dl>
+    </li>
+    {{/each}}
+</ul>
+{{/if}}
+
+<form method="POST" action="/addComment/{{article._id}}">
+    <h3>What did you think of this?</h3>
+    <section>
+        <label for="name">Your name:</label>
+        <input type="text" id="name" name="name">
+    </section>
+    <section>
+        <label for="email">Your email:</label>
+        <input type="text" id="email" name="email">
+    </section>
+    <section>
+        <label for="comment">Comment</label>
+        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+    </section>
+    <button type="submit">Add a comment</button>
+</form>

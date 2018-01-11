@@ -1,0 +1,33 @@
+{
+  "name": "nyt-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hugh0513/NYT-Scraper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hugh0513/NYT-Scraper/issues"
+  },
+  "homepage": "https://github.com/Hugh0513/NYT-Scraper#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "hbs": "^4.0.1",
+    "mongojs": "^2.4.1",
+    "mongoose": "^4.13.9",
+    "morgan": "^1.9.0",
+    "request": "^2.83.0",
+    "serve-favicon": "^2.4.5"
+  }
+}
