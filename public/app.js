@@ -1,3 +1,5 @@
+
+/*
 // Grab the articles as a json
 $.getJSON("/articles", function(data) {
   // For each one
@@ -6,7 +8,7 @@ $.getJSON("/articles", function(data) {
     $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
   }
 });
-
+*/
 
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
@@ -104,20 +106,51 @@ $('#scrapeArticles').on('click', function () {
 
   $.get('/newArticles').done(function(data) {
 
-
     for (var i = 0; i < data.length; i++) {
       // Display the apropos information on the page
-      $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+      $("#articles").append("<div class='panel panel-heading'>"
+        + "<div class='panel-heading'>" 
+        + "<button class='edit btn btn-default saveArticle' data-title='"
+        + data[i].title + "' data-link='"
+        + data[i].link +"'>Save Article</button><h3>"
+        + data[i].title + "</h3></div><div class='panel-body'><p>"
+        + data[i].link + "</p></div></div>");
     }
 
-
-
-      $('.modal-body').text("Added 30 new articles!");
-      event.preventDefault();
-      jQuery.noConflict();
-      $('#myModal').modal('show');
+    $('.modal-body').text("Added 30 new articles!");
+    event.preventDefault();
+    jQuery.noConflict();
+    $('#myModal').modal('show');
 
   });
+});
 
 
+// Save an article
+$("#articles").on("click", ".saveArticle", function() {
+  event.preventDefault();
+  console.log("saveArticle");
+
+  var title = $(this).attr("data-title");
+  console.log(title);
+  var link = $(this).attr("data-link");
+  console.log(link);
+
+  var newArticle = {
+    title: title,
+    link: link
+  }
+
+  $.post('/scrapeArticle', newArticle)
+    // on success, run this callback
+    .done(function(data) {
+      // log the data we found
+      //console.log(data);
+      // tell the user we're adding a recipe with an alert window
+    $('.modal-body').text("Saved the article");
+    event.preventDefault();
+    jQuery.noConflict();
+    $('#myModal').modal('show');
+
+  });
 });

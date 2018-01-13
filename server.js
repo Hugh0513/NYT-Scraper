@@ -168,23 +168,26 @@ app.get("/newArticles", function(req, res) {
       console.log(articles);
       //res.json(response);
       
-      /*
-
-      // Create a new Article using the `result` object built from scraping
-      db.Article
-        .create(result)
-        .then(function(dbArticle) {
-          // If we were able to successfully scrape and save an Article, send a message to the client
-          res.send("Scrape Complete");
-        })
-        .catch(function(err) {
-          // If an error occurred, send it to the client
-          res.json(err);
-        });
-      */
     });
 
-      res.json(articles);
+    res.json(articles);
 
   });
+});
+
+
+// Route for saving an Article
+app.post("/scrapeArticle", function(req, res) {
+  // Create a new note and pass the req.body to the entry
+  console.log(req.body);
+  db.Article
+    .create(req.body)
+    .then(function(dbArticle) {
+      // If we were able to successfully scrape and save an Article, send a message to the client
+      res.send("Scrape Complete");
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
 });

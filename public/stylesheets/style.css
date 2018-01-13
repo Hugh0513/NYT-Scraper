@@ -2,7 +2,7 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
+/*
 #wrapper {
   width: 960px;
   margin-left: auto;
@@ -12,7 +12,7 @@ body {
 #articles {
   display: inline-block;
   overflow: auto;
-  width: 60%;
+  width: 90%;
   height: 700px;
 }
 #notes {
@@ -36,7 +36,7 @@ textarea {
 a {
   color: #00B7FF;
 }
-
+*/
 .panel-heading button.delete,
 button.edit {
   float: right;
@@ -44,12 +44,12 @@ button.edit {
 }
 
 .panel-heading {
-	background-color: #777;
+	background-color: #6495ED;
 }
 
 .panel-body {
 	background-color: #eee;
 	padding: 5px;
-    border-style: solid;
-    border-color: #777;
+  border-style: solid;
+  border-color: #6495ED;
 }
