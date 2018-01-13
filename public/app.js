@@ -152,5 +152,8 @@ $("#articles").on("click", ".saveArticle", function() {
     jQuery.noConflict();
     $('#myModal').modal('show');
 
+
   });
+    //Delete this
+    $(this).parent().parent("div").remove();
 });
