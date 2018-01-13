@@ -17,6 +17,11 @@ var PORT = 3000;
 // Initialize Express
 var app = express();
 
+
+// Dependencies
+var path = require("path");
+
+
 // Configure middleware
 
 // Use morgan logger for logging requests
@@ -29,17 +34,20 @@ app.use(express.static("public"));
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-/*
-mongoose.connect("mongodb://localhost/hugh-scraper", {
+
+/*mongoose.connect("mongodb://localhost/hugh-scraper", {
   useMongoClient: true
 });
+
 */
-mongoose.connect("mongodb://heroku_dqs126r3:gtghhunrqqg00evv1f79jlq80l@ds245277.mlab.com:45277/heroku_dqs126r3", {
-  useMongoClient: true
-});
+// heroku
+mongoose.connect("mongodb://heroku_dqs126r3:gtghhunrqqg00evv1f79jlq80l@ds245277.mlab.com:45277/heroku_dqs126r3",{});
 
 
 // Routes
+app.get("/saved", function(req, res){
+  res.sendFile(path.join(__dirname, "./public/saved.html"));
+});
 
 // A GET route for scraping the echojs website
 app.get("/scrape", function(req, res) {
@@ -148,7 +156,7 @@ app.listen(PORT, function() {
 
 
 
-// Route for getting all Articles from the db
+// Route for getting all Articles from the web and not db
 app.get("/newArticles", function(req, res) {
   // First, we grab the body of the html with request
   axios.get("http://www.echojs.com/").then(function(response) {
