@@ -80,14 +80,6 @@ $('#mondal-btn').on('click', function () {
   console.log("test");
 });
 
-$('#saveArticles').on('click', function () {
-  console.log("saveArticles");
-
-
-  console.log(articles);
-
-});
-
 $('#scrapeArticles').on('click', function () {
   console.log("scrapeArticles");
 
