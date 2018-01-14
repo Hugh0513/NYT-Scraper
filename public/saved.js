@@ -135,10 +135,14 @@ $('#scrapeArticles').on('click', function () {
 // Delete an article
 $("#articles").on("click", ".deleteArticle", function() {
   event.preventDefault();
-  console.log("saveArticle");
+  console.log("deleteArticle");
   console.log($(this).attr("data-id"));
 
-  $.post('/deleteArticle', newArticle)
+  var deleteArticle = {
+    _id: $(this).attr("data-id")
+  };
+
+  $.post('/deleteArticle', deleteArticle)
     // on success, run this callback
     .done(function(data) {
       // log the data we found
