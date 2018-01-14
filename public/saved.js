@@ -7,11 +7,10 @@ $.getJSON("/articles", function(data) {
     // Display the apropos information on the page
     $("#articles").append("<div class='panel panel-heading'>"
       + "<div class='panel-heading'>" 
-      + "<button class='edit btn btn-default noteArticle' data-title='"
-      + data[i].title + "' data-link='"
-      + data[i].link +"'>Save Article</button>"
-      + "<button class='delete btn btn-default deleteArticle' data-title='"
-      + data[i]._id + "'>Save Article</button><h3>"
+      + "<button class='edit btn btn-default deleteArticle' data-id='"
+      + data[i]._id + "'>Delete From Saved</button>"
+      + "<button class='delete btn btn-default noteArticle' data-id='"
+      + data[i]._id + "'>Article Notes</button><h3>"
       + data[i].title + "</h3></div><div class='panel-body'><p>"
       + data[i].link + "</p></div></div>");
   }
@@ -133,22 +132,13 @@ $('#scrapeArticles').on('click', function () {
 });
 
 
-// Save an article
-$("#articles").on("click", ".saveArticle", function() {
+// Delete an article
+$("#articles").on("click", ".deleteArticle", function() {
   event.preventDefault();
   console.log("saveArticle");
+  console.log($(this).attr("data-id"));
 
-  var title = $(this).attr("data-title");
-  console.log(title);
-  var link = $(this).attr("data-link");
-  console.log(link);
-
-  var newArticle = {
-    title: title,
-    link: link
-  }
-
-  $.post('/scrapeArticle', newArticle)
+  $.post('/deleteArticle', newArticle)
     // on success, run this callback
     .done(function(data) {
       // log the data we found
@@ -158,7 +148,6 @@ $("#articles").on("click", ".saveArticle", function() {
     event.preventDefault();
     jQuery.noConflict();
     $('#myModal').modal('show');
-
 
   });
     //Delete this

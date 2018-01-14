@@ -35,14 +35,14 @@ app.use(express.static("public"));
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
 
-/*mongoose.connect("mongodb://localhost/hugh-scraper", {
+mongoose.connect("mongodb://localhost/hugh-scraper", {
   useMongoClient: true
 });
 
-*/
+/*
 // heroku
 mongoose.connect("mongodb://heroku_dqs126r3:gtghhunrqqg00evv1f79jlq80l@ds245277.mlab.com:45277/heroku_dqs126r3",{});
-
+*/
 
 // Routes
 app.get("/saved", function(req, res){
@@ -204,4 +204,11 @@ app.post("/scrapeArticle", function(req, res) {
       // If an error occurred, send it to the client
       res.json(err);
     });
+});
+
+
+// Delete Article
+app.post("/deleteArticle", function(req, res) {
+  console.log(req.body);
+  db.Article.remove(req.body).then(function(dbArticle) {_id:req.id});
 });
