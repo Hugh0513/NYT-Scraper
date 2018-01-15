@@ -1,4 +1,3 @@
-
 // Grab the articles as a json
 $.getJSON("/articles", function(data) {
   // For each one
@@ -22,19 +21,12 @@ $.getJSON("/articles", function(data) {
   }
 });
 
-
+// Test use
 $('#mondal-btn').on('click', function () {
   console.log("test");
 });
 
-$('#saveArticles').on('click', function () {
-  console.log("saveArticles");
-
-  console.log(articles);
-
-});
-
-// Article Notes
+// Display Article Notes and Input Note Area in Modal
 $("#articles").on("click", ".noteArticle", function() {
   console.log("noteArticle");
   console.log($(this).attr("data-id"));
@@ -78,7 +70,6 @@ $("#articles").on("click", ".noteArticle", function() {
 
 });
 
-
 // Delete an article
 $("#articles").on("click", ".deleteArticle", function() {
   event.preventDefault();
@@ -92,9 +83,7 @@ $("#articles").on("click", ".deleteArticle", function() {
   $.post('/deleteArticle', deleteArticle)
     // on success, run this callback
     .done(function(data) {
-      // log the data we found
-      //console.log(data);
-      // tell the user we're adding a recipe with an alert window
+      
     $('.modal-body').text("Saved the article");
     event.preventDefault();
     jQuery.noConflict();

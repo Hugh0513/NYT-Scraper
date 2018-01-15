@@ -1,14 +1,3 @@
-
-/*
-// Grab the articles as a json
-$.getJSON("/articles", function(data) {
-  // For each one
-  for (var i = 0; i < data.length; i++) {
-    // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-  }
-});
-*/
 $(document).ready(function(){
 
   $("#articles").append("<div class='panel panel-danger'>"
@@ -46,11 +35,12 @@ $(document).on("click", "#savenote", function() {
   $("#bodyinput").val("");
 });
 
-
+// Test use
 $('#mondal-btn').on('click', function () {
   console.log("test");
 });
 
+// Scrape Articles
 $('#scrapeArticles').on('click', function () {
   console.log("scrapeArticles");
   $("#articles").empty();
@@ -75,7 +65,6 @@ $('#scrapeArticles').on('click', function () {
 
   });
 });
-
 
 // Save an article
 $("#articles").on("click", ".saveArticle", function() {
@@ -102,8 +91,6 @@ $("#articles").on("click", ".saveArticle", function() {
     event.preventDefault();
     jQuery.noConflict();
     $('#myModal').modal('show');
-
-
   });
     //Delete this
     $(this).parent().parent("div").remove();
