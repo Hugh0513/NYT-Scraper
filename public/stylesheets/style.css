@@ -41,12 +41,21 @@ a {
   cursor: pointer;
 }
 
+/*
 .panel-heading button.delete,
 button.edit {
   float: right;
   margin: 5px;
 }
+*/
 
+button.delete,
+button.edit {
+  float: right;
+  margin: 5px;
+}
+
+/*
 .panel-heading {
 	background-color: #6495ED;
 }
@@ -56,4 +65,10 @@ button.edit {
 	padding: 5px;
   border-style: solid;
   border-color: #6495ED;
+}
+*/
+
+.noteHistory {
+  overflow: auto;
+  padding: 5px;
 }
