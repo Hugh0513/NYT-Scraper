@@ -1,5 +1,4 @@
 
-
 // Grab the articles as a json
 $.getJSON("/articles", function(data) {
   // For each one
@@ -16,41 +15,6 @@ $.getJSON("/articles", function(data) {
   }
 });
 
-// Whenever someone clicks a p tag
-$(document).on("click", "p", function() {
-//$("#scrapeArticles").on("click", function() {
-  console.log("scrapeArticles");
-  // Empty the notes from the note section
-  $("#notes").empty();
-  // Save the id from the p tag
-  var thisId = $(this).attr("data-id");
-
-  // Now make an ajax call for the Article
-  $.ajax({
-    method: "GET",
-    url: "/articles/" + thisId
-  })
-    // With that done, add the note information to the page
-    .done(function(data) {
-      console.log(data);
-      // The title of the article
-      $("#notes").append("<h2>" + data.title + "</h2>");
-      // An input to enter a new title
-      $("#notes").append("<input id='titleinput' name='title' >");
-      // A textarea to add a new note body
-      $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
-      // A button to submit a new note, with the id of the article saved to it
-      $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
-
-      // If there's a note in the article
-      if (data.note) {
-        // Place the title of the note in the title input
-        $("#titleinput").val(data.note.title);
-        // Place the body of the note in the body textarea
-        $("#bodyinput").val(data.note.body);
-      }
-    });
-});
 
 // When you click the savenote button
 $(document).on("click", "#savenote", function() {
@@ -89,46 +53,45 @@ $('#mondal-btn').on('click', function () {
 $('#saveArticles').on('click', function () {
   console.log("saveArticles");
 
-
   console.log(articles);
 
 });
 
-$('#scrapeArticles').on('click', function () {
-  console.log("scrapeArticles");
+// Article Notes
+$("#articles").on("click", ".noteArticle", function() {
+  console.log("noteArticle");
+  console.log($(this).attr("data-id"));
+  // Empty the notes from the note section
+  $("#notes").empty();
+  // Save the id from the p tag
+  var thisId = $(this).attr("data-id");
 
-  /*
-  $.get('/scrape', function(data) {
+  // Now make an ajax call for the Notes
+  $.ajax({
+    method: "GET",
+    url: "/notes/" + thisId
+  })
+    // With that done, add the note information to the page
+    .done(function(data) {
+      console.log(data);
+      // The title of the article
+      $("#notes").append("<h2>" + data.title + "</h2>");
+      // An input to enter a new title
+      $("#notes").append("<input id='titleinput' name='title' >");
+      // A textarea to add a new note body
+      $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+      // A button to submit a new note, with the id of the article saved to it
+      $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
 
-  }).done(function(data) {
+      // If there's a note in the article
+      if (data.note) {
+        // Place the title of the note in the title input
+        $("#titleinput").val(data.note.title);
+        // Place the body of the note in the body textarea
+        $("#bodyinput").val(data.note.body);
+      }
+    });
 
-      $('.modal-body').text("Added 30 new articles!");
-      event.preventDefault();
-      jQuery.noConflict();
-      $('#myModal').modal('show');
-
-  });
-  */
-
-  $.get('/newArticles').done(function(data) {
-
-    for (var i = 0; i < data.length; i++) {
-      // Display the apropos information on the page
-      $("#articles").append("<div class='panel panel-heading'>"
-        + "<div class='panel-heading'>" 
-        + "<button class='edit btn btn-default saveArticle' data-title='"
-        + data[i].title + "' data-link='"
-        + data[i].link +"'>Save Article</button><h3>"
-        + data[i].title + "</h3></div><div class='panel-body'><p>"
-        + data[i].link + "</p></div></div>");
-    }
-
-    $('.modal-body').text("Added 30 new articles!");
-    event.preventDefault();
-    jQuery.noConflict();
-    $('#myModal').modal('show');
-
-  });
 });
 
 
@@ -156,4 +119,34 @@ $("#articles").on("click", ".deleteArticle", function() {
   });
     //Delete this
     $(this).parent().parent("div").remove();
+});
+
+
+// When you click the savenote button
+$("#myModal").on("click", "#savenote", function() {
+  // Grab the id associated with the article from the submit button
+  var thisId = $(this).attr("data-id");
+
+  // Run a POST request to change the note, using what's entered in the inputs
+  $.ajax({
+    method: "POST",
+    url: "/articles/" + thisId,
+    data: {
+      // Value taken from title input
+      title: $("#titleinput").val(),
+      // Value taken from note textarea
+      body: $("#bodyinput").val()
+    }
+  })
+    // With that done
+    .done(function(data) {
+      // Log the response
+      console.log(data);
+      // Empty the notes section
+      $("#notes").empty();
+    });
+
+  // Also, remove the values entered in the input and textarea for note entry
+  $("#titleinput").val("");
+  $("#bodyinput").val("");
 });

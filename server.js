@@ -128,6 +128,37 @@ app.get("/articles/:id", function(req, res) {
     });
 });
 
+
+// Route for getting all Notes from the db
+app.get("/notes", function(req, res) {
+  // Grab every document in the Articles collection
+  db.Note
+    .find({})
+    .then(function(dbNote) {
+      // If we were able to successfully find Notes, send them back to the client
+      res.json(dbNote);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
+
+// Route for saving/updating an Article's associated Note
+app.get("/notes/:id", function(req, res) {
+  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  db.Note
+    .find({ article_id: req.params.id })
+    .then(function(dbNotes) {
+      // If we were able to successfully find an Article with the given id, send it back to the client
+      res.json(dbNotes);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
+
 // Route for saving/updating an Article's associated Note
 app.post("/articles/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry
