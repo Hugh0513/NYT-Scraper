@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   $("#articles").append("<div class='panel panel-danger'>"
     + "<div class='panel-heading'>" 
-    + "<h3>We don't have any saved article</h3></div></div>");
+    + "<h3>We don't have any new articles</h3></div></div>");
 
 })
 
